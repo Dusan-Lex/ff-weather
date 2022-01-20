@@ -1,8 +1,9 @@
 export interface City {
   id: number;
   name: string;
+  state: string;
   country: string;
-  coords: { lon: number; lat: number };
+  coord: Coord;
 }
 
 export interface CityCurrentForecast {
