@@ -4,14 +4,17 @@ import { color, mixin } from "../shered/styles";
 import { CityCurrentForecast } from "../types/weathertypes";
 
 const StyledCurrentForecast = styled.div`
+  cursor: pointer;
   width: 100%;
   height: auto;
-  min-height: 27rem;
   background-color: ${mixin.lighten(color.primary, 0.7)};
   display: flex;
+  &:first-of-type {
+    border-bottom: 1px solid ${mixin.darken(color.primary, 0.1)};
+  }
 `;
 
-const WeatherIconBox = styled.div`
+export const WeatherIconBox = styled.div`
   width: 20%;
   background-color: ${mixin.lighten(color.primary, 0.4)};
   ${mixin.center}
@@ -20,7 +23,7 @@ const WeatherIconBox = styled.div`
   }
 `;
 
-const WeatherIcon = styled.img`
+export const WeatherIcon = styled.img`
   width: 70%;
   @media only screen and (max-width: 900px) {
     width: 85%;
@@ -36,15 +39,20 @@ const WeatherDescription = styled.div`
   height: 100%;
   background-color: ${mixin.lighten(color.primary, 0.7)};
   font-size: 1.9rem;
-  h2 {
-    margin: 1rem 0;
-    display: inline-block;
-    color: ${color.primary};
+  .city {
+    display: flex;
+    flex-direction: column;
+    div {
+      display: flex;
+      h2 {
+        margin: 1rem 0;
+        display: inline-block;
+        color: ${color.primary};
+        margin-right: 1.3rem;
+      }
+    }
   }
-  p {
-    margin-top: 0;
-    font-weight: 500;
-  }
+
   .temp-wind-clouds {
     padding: 2rem 0;
     line-height: 3.3rem;
@@ -82,11 +90,16 @@ const CurrentForecast = ({ city }: CurrentForecastProps) => {
         ></WeatherIcon>
       </WeatherIconBox>
       <WeatherDescription>
-        <div>
-          <h2>
-            {city.name} , {city.sys.country}{" "}
-          </h2>
-          <p>{city.weather[0].description.toUpperCase()}</p>
+        <div className="city">
+          <div>
+            <h2>
+              {city.name} , {city.sys.country}
+            </h2>
+            <span
+              className={`fi fi-${city.sys.country.toLocaleLowerCase()}`}
+            ></span>
+          </div>
+          <div>{city.weather[0].description.toUpperCase()}</div>
         </div>
 
         <div className="temp-wind-clouds">

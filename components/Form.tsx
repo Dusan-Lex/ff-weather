@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { color, mixin } from "../shered/styles";
 
 const StyledForm = styled.form`
-  height: 18rem;
+  height: 20vh;
   background: linear-gradient(
     to left,
     ${mixin.lighten(color.primary, 0.15)},
@@ -17,7 +17,7 @@ const StyledFormInput = styled.input`
   ${mixin.placeholderColor(mixin.lighten(color.primary, 0.3))};
   color: ${mixin.darken(color.primary, 0.5)};
   width: 70%;
-  max-width: 30rem;
+  max-width: 28rem;
   height: 4rem;
   line-height: 3rem;
   font-size: 1.8rem;
@@ -64,8 +64,9 @@ const Form = ({ onSubmit }: FormProps) => {
   };
   const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    input && onSubmit(input);
-    setInput("");
+    if (input.length >= 3) {
+      onSubmit(input);
+    }
   };
   return (
     <StyledForm onSubmit={submitHandler}>

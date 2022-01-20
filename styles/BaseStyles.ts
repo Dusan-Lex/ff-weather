@@ -3,7 +3,6 @@ import { createGlobalStyle } from "styled-components";
 export default createGlobalStyle`
   html {
     height: 100%;
-    min-height: 100%;
     font-size: 62.5%; 
     @media only screen and (min-width: 112.5em) {
       font-size: 75%;

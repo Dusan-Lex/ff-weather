@@ -1,3 +1,10 @@
+export interface City {
+  id: number;
+  name: string;
+  country: string;
+  coords: { lon: number; lat: number };
+}
+
 export interface CityCurrentForecast {
   coord: Coord;
   weather: Weather[];
