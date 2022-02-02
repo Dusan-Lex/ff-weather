@@ -50,22 +50,29 @@ const StyledFormButton = styled.button`
     stroke: white;
     margin-right: 0.5rem;
   }
+  &.disabled {
+    cursor: not-allowed;
+    background: ${mixin.darken(color.primary, 0.65)};
+  }
 `;
 
 interface FormProps {
   onSubmit: Function;
+  loading: boolean;
 }
 
-const Form = ({ onSubmit }: FormProps) => {
+const Form = ({ onSubmit, loading }: FormProps) => {
   const [input, setInput] = useState<string>("");
+  const [searchInput, setSearchInput] = useState<string>("");
 
   const changeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInput(e.target.value);
   };
   const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (input.length >= 3) {
+    if (input !== searchInput) {
       onSubmit(input);
+      setSearchInput(input);
     }
   };
   return (
@@ -76,7 +83,10 @@ const Form = ({ onSubmit }: FormProps) => {
         value={input}
         onChange={changeHandler}
       />
-      <StyledFormButton>
+      <StyledFormButton
+        className={loading ? "disabled" : ""}
+        disabled={loading}
+      >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width={"2rem"}

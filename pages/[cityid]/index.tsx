@@ -27,7 +27,7 @@ const DayBox = styled.div`
     margin: 1px;
     height: 30rem;
     width: 19.5%;
-    background-color: ${mixin.lighten(color.primary, 0.7)};
+    background-color: ${mixin.lighten(color.primary, 0.6)};
     ${mixin.center}
     flex-direction: column;
     &-day {
